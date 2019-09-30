@@ -4,19 +4,19 @@ import ReactDOM from "react-dom";
 import "./styles.css";
 
 function Name(props) {
-  return React.createElement("h1", { id: "name" }, props.name);
+  return <h1 id="name">{props.name}</h1>;
 }
 
 function Handle(props) {
-  return React.createElement("h3", { id: "handle" }, props.handle);
+  return <h3 id="handle">{props.handle}</h3>;
 }
 
 function App(props) {
-  return React.createElement(
-    "div",
-    null,
-    Name({ name: "Martin Harrigan" }),
-    Handle({ handle: "@harrigan" })
+  return (
+    <div>
+      <Name name="Martin Harrigan" />
+      <Handle handle="@harrigan" />
+    </div>
   );
 }
 
