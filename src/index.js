@@ -2,8 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import Loading from "./Loading";
+import Dice from "./Dice";
 
 import "./styles.css";
+import "./dice.css";
 
 function Name(props) {
   return <h1 id="name">{props.name}</h1>;
@@ -126,6 +128,7 @@ function App(props) {
       <Handle handle="@harrigan" />
       <Avatar imgSrc="https://avatars2.githubusercontent.com/u/31845616?s=460&v=4" />
       <FriendsList />
+      <Dice />
     </div>
   );
 }
