@@ -4,7 +4,7 @@ Created with CodeSandbox. The sandbox is available at https://codesandbox.io/s/r
 
 ## Resources
 
-* [React hOMEPAGE](https://reactjs.org)
+* [React Homepage](https://reactjs.org)
 * [Tyler McGinnis Video Courses](https://tylermcginnis.comg)
 * [Babel: JavaScript Transpiler](https://babeljs.io/repl)
 * [IBM Carbon Design System](https://www.carbondesignsystem.com)
