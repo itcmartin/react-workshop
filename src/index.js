@@ -2,8 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import Loading from "./Loading";
+import Dice from "./Dice";
 
 import "./styles.css";
+import "./dice.css";
 
 function Name(props) {
   return <h1 id="name">{props.name}</h1>;
@@ -14,7 +16,7 @@ function Handle(props) {
 }
 
 function Avatar(props) {
-  return <img src={props.imgSrc} width="40" height="40" />;
+  return <img alt="Avatar" src={props.imgSrc} width="40" height="40" />;
 }
 
 window.API = {
@@ -91,10 +93,12 @@ class FriendsList extends React.Component {
     } else {
       return (
         <div>
+          <h3>Friends List</h3>
           <ul>
             {this.state.friends.map(name => (
               <li key={name}>
                 <span>{name}</span>
+                &nbsp;
                 <button onClick={() => this.handleRemoveFriend(name)}>
                   Remove
                 </button>
@@ -124,6 +128,7 @@ function App(props) {
       <Handle handle="@harrigan" />
       <Avatar imgSrc="https://avatars2.githubusercontent.com/u/31845616?s=460&v=4" />
       <FriendsList />
+      <Dice />
     </div>
   );
 }
