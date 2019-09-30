@@ -11,11 +11,16 @@ function Handle(props) {
   return <h3 id="handle">{props.handle}</h3>;
 }
 
+function Avatar(props) {
+  return <img src={props.imgSrc} width="40" height="40" />;
+}
+
 function App(props) {
   return (
     <div>
       <Name name="Martin Harrigan" />
       <Handle handle="@harrigan" />
+      <Avatar imgSrc="https://avatars2.githubusercontent.com/u/31845616?s=460&v=4" />
     </div>
   );
 }
