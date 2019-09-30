@@ -15,16 +15,14 @@ function Avatar(props) {
   return <img src={props.imgSrc} width="40" height="40" />;
 }
 
-// function-based component
-// function FriendsList(props) {
-//   return (
-//     <ul>
-//       <li>Alice</li>
-//       <li>Bob</li>
-//       <li>Carol</li>
-//     </ul>
-//   );
-// }
+window.API = {
+  fetchFriends() {
+    return new Promise((res, req) => {
+      const friends = ["Alice", "Bob", "Carol"];
+      setTimeout(() => res(friends), 2000);
+    });
+  }
+};
 
 // class-based component
 class FriendsList extends React.Component {
@@ -32,8 +30,38 @@ class FriendsList extends React.Component {
     super(props);
 
     this.state = {
-      friends: ["Alice", "Bob", "Carol"]
+      friends: [],
+      input: ""
     };
+
+    console.log("---------- CONSTRUCTOR");
+  }
+
+  componentDidMount() {
+    console.log("---------- COMPONENT DID MOUNT");
+    // now get the friends and update state with the new friends
+    window.API.fetchFriends().then(friends => {
+      this.setState({
+        friends: friends
+      });
+    });
+  }
+
+  componentDidUpdate() {
+    console.log("---------- COMPONENT DID UPDATE");
+  }
+
+  componentWillUmount() {
+    console.log("---------- COMPONENT WILL UNMOUNT");
+  }
+
+  handleAddFriend(name) {
+    this.setState(currentState => {
+      return {
+        friends: currentState.friends.concat([name]),
+        input: ""
+      };
+    });
   }
 
   handleRemoveFriend(name) {
@@ -44,18 +72,38 @@ class FriendsList extends React.Component {
     });
   }
 
+  updateNewFriendName(event) {
+    const value = event.target.value;
+    this.setState({
+      input: value
+    });
+  }
+
   render() {
+    console.log("---------- RENDER");
     return (
-      <ul>
-        {this.state.friends.map(name => (
-          <li key={name}>
-            <span>{name}</span>
-            <button onClick={() => this.handleRemoveFriend(name)}>
-              Remove
-            </button>
-          </li>
-        ))}
-      </ul>
+      <div>
+        <ul>
+          {this.state.friends.map(name => (
+            <li key={name}>
+              <span>{name}</span>
+              <button onClick={() => this.handleRemoveFriend(name)}>
+                Remove
+              </button>
+            </li>
+          ))}
+        </ul>
+        <h4>Add a new friend:</h4>
+        <input
+          type="text"
+          placeholder="Enter friend name"
+          value={this.state.input}
+          onChange={event => this.updateNewFriendName(event)}
+        />
+        <button onClick={() => this.handleAddFriend(this.state.input)}>
+          Add Friend
+        </button>
+      </div>
     );
   }
 }
