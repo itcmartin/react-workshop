@@ -15,12 +15,45 @@ function Avatar(props) {
   return <img src={props.imgSrc} width="40" height="40" />;
 }
 
+// function-based component
+// function FriendsList(props) {
+//   return (
+//     <ul>
+//       <li>Alice</li>
+//       <li>Bob</li>
+//       <li>Carol</li>
+//     </ul>
+//   );
+// }
+
+// class-based component
+class FriendsList extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      friends: ["Alice", "Bob", "Carol"]
+    };
+  }
+
+  render() {
+    return (
+      <ul>
+        {this.state.friends.map(name => (
+          <li key={name}>{name}</li>
+        ))}
+      </ul>
+    );
+  }
+}
+
 function App(props) {
   return (
     <div>
       <Name name="Martin Harrigan" />
       <Handle handle="@harrigan" />
       <Avatar imgSrc="https://avatars2.githubusercontent.com/u/31845616?s=460&v=4" />
+      <FriendsList />
     </div>
   );
 }
