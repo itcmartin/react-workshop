@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+import Loading from "./Loading";
+
 import "./styles.css";
 
 function Name(props) {
@@ -31,7 +33,8 @@ class FriendsList extends React.Component {
 
     this.state = {
       friends: [],
-      input: ""
+      input: "",
+      loading: true
     };
 
     console.log("---------- CONSTRUCTOR");
@@ -42,7 +45,8 @@ class FriendsList extends React.Component {
     // now get the friends and update state with the new friends
     window.API.fetchFriends().then(friends => {
       this.setState({
-        friends: friends
+        friends: friends,
+        loading: false
       });
     });
   }
@@ -81,30 +85,35 @@ class FriendsList extends React.Component {
 
   render() {
     console.log("---------- RENDER");
-    return (
-      <div>
-        <ul>
-          {this.state.friends.map(name => (
-            <li key={name}>
-              <span>{name}</span>
-              <button onClick={() => this.handleRemoveFriend(name)}>
-                Remove
-              </button>
-            </li>
-          ))}
-        </ul>
-        <h4>Add a new friend:</h4>
-        <input
-          type="text"
-          placeholder="Enter friend name"
-          value={this.state.input}
-          onChange={event => this.updateNewFriendName(event)}
-        />
-        <button onClick={() => this.handleAddFriend(this.state.input)}>
-          Add Friend
-        </button>
-      </div>
-    );
+
+    if (this.state.loading) {
+      return <Loading />;
+    } else {
+      return (
+        <div>
+          <ul>
+            {this.state.friends.map(name => (
+              <li key={name}>
+                <span>{name}</span>
+                <button onClick={() => this.handleRemoveFriend(name)}>
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
+          <h4>Add a new friend:</h4>
+          <input
+            type="text"
+            placeholder="Enter friend name"
+            value={this.state.input}
+            onChange={event => this.updateNewFriendName(event)}
+          />
+          <button onClick={() => this.handleAddFriend(this.state.input)}>
+            Add Friend
+          </button>
+        </div>
+      );
+    }
   }
 }
 
