@@ -14,7 +14,7 @@ function Handle(props) {
 }
 
 function Avatar(props) {
-  return <img src={props.imgSrc} width="40" height="40" />;
+  return <img alt="Avatar" src={props.imgSrc} width="40" height="40" />;
 }
 
 window.API = {
@@ -91,10 +91,12 @@ class FriendsList extends React.Component {
     } else {
       return (
         <div>
+          <h3>Friends List</h3>
           <ul>
             {this.state.friends.map(name => (
               <li key={name}>
                 <span>{name}</span>
+                &nbsp;
                 <button onClick={() => this.handleRemoveFriend(name)}>
                   Remove
                 </button>
