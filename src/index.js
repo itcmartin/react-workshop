@@ -36,11 +36,24 @@ class FriendsList extends React.Component {
     };
   }
 
+  handleRemoveFriend(name) {
+    this.setState(currentState => {
+      return {
+        friends: currentState.friends.filter(friend => friend !== name)
+      };
+    });
+  }
+
   render() {
     return (
       <ul>
         {this.state.friends.map(name => (
-          <li key={name}>{name}</li>
+          <li key={name}>
+            <span>{name}</span>
+            <button onClick={() => this.handleRemoveFriend(name)}>
+              Remove
+            </button>
+          </li>
         ))}
       </ul>
     );
